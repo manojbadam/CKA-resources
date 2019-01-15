@@ -15,3 +15,5 @@ Three main Linux Distros
     a. Ubuntu
 3. Suse 
     a. OpenSUSE
+
+* [firwalld](https://firewalld.org/) is a replacement iptables

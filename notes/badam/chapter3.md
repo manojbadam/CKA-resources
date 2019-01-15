@@ -35,6 +35,35 @@ This chapter is about installation and configuration
 * Beware that pod network must not overlap with any of host networks as this can cause issues. (Pod cidr and VPC cidr shouldn't overlap)
 * 
 
+### Installers
+  * [kubeadm guide](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm/)
+  * [kubespray](https://github.com/kubernetes-sigs/kubespray)
+  * [kops](https://github.com/kubernetes/kops)
+  * [hyperkube](https://github.com/kubernetes/kubernetes/tree/master/cluster/images/hyperkube)
+    * contains all the k8s binaries (kubelet etc)
+### kubectl
+* `kubectl config use-context foobar`
+  * **context** switches the "current" config/cluster/credentials
+### pod networking
+* [kubernetes networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+  * kubernetes model:
+    * all containers can communicate with all other containers without NAT
+    * all nodes can communicate with all containers (and vice-versa) without NAT
+    * the IP that a container sees itself as is the same IP that others see it as
+* cni helps adhere to that contract 
+* [cncf CNI](https://www.cncf.io/blog/2017/05/23/cncf-hosts-container-networking-interface-cni/)
+  * lots of networking choices (calico, flannel, kube-router, romana, weave net)
+### Installing components
+* use systemd to run kubelet/master components
+* api-server has various flags to enable/disable features
+* can run these components individually, or inside a container themselves with [hyperkube](https://console.cloud.google.com/gcr/images/google-containers/GLOBAL/hyperkube)
+### Compiling from source
+```sh
+cd $GOPATH
+git clone https://github.com/kubernetes/kubernetes.git
+cd kubernetes
+make
+
 #### TODO List
 * In our EKS cluster, we are using the `hyperkube` image, verify how are we using it ?
 * Can we use kubectl contexts in place of `kethos` switches ? 
